@@ -487,7 +487,8 @@ set(LLVM_ALL_TARGETS
   WebAssembly
   X86
   XCore
-  )
+  Sim
+)
 
 set(LLVM_ALL_EXPERIMENTAL_TARGETS
   ARC
