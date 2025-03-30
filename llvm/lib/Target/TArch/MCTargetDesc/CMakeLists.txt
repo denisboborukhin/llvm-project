@@ -3,6 +3,7 @@ add_llvm_component_library(LLVMTArchDesc
   TArchMCAsmInfo.cpp
   TArchInstPrinter.cpp
   TArchMCCodeEmitter.cpp
+  TArchAsmBackend.cpp
 
   LINK_COMPONENTS
   MC
