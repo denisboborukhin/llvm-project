@@ -1,29 +1,12 @@
-add_llvm_component_group(TArch)
-
-set(LLVM_TARGET_DEFINITIONS TArch.td)
-
-tablegen(LLVM TArchGenRegisterInfo.inc -gen-register-info)
-tablegen(LLVM TArchGenInstrInfo.inc -gen-instr-info)
-tablegen(LLVM TArchGenSubtargetInfo.inc -gen-subtarget)
-
-add_public_tablegen_target(TArchCommonTableGen)
-
-add_llvm_target(TArchCodeGen
-  TArchTargetMachine.cpp
-  TArchRegisterInfo.cpp
-  TArchInstrInfo.cpp
-  TArchSubtarget.cpp
+add_llvm_component_library(LLVMTArchDesc
+  TArchMCTargetDesc.cpp
+  TArchMCAsmInfo.cpp
 
   LINK_COMPONENTS
-  CodeGen
-  Core
+  MC
   Support
-  Target
   TArchInfo
 
   ADD_TO_COMPONENT
   TArch
-  )
-
-add_subdirectory(MCTargetDesc)
-add_subdirectory(TargetInfo)
+ )

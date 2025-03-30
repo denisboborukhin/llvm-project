@@ -1,10 +1,13 @@
 #include "MCTargetDesc/TArchInfo.h"
 #include "TArch.h"
+#include "TArchMCAsmInfo.h"
 #include "TargetInfo/TArchTargetInfo.h"
+#include "llvm/MC/MCDwarf.h"
 #include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
 #include "llvm/MC/MCSubtargetInfo.h"
 #include "llvm/MC/TargetRegistry.h"
+#include "llvm/Support/ErrorHandling.h"
 
 using namespace llvm;
 
@@ -37,10 +40,22 @@ static MCSubtargetInfo *createTArchMCSubtargetInfo(const Triple &TT,
   return createTArchMCSubtargetInfoImpl(TT, CPU, /*TuneCPU*/ CPU, FS);
 }
 
+static MCAsmInfo *createTArchMCAsmInfo(const MCRegisterInfo &MRI,
+                                     const Triple &TT,
+                                     const MCTargetOptions &Options) {
+  TARCH_DUMP_MAGENTA
+  MCAsmInfo *MAI = new TArchELFMCAsmInfo(TT);
+  unsigned SP = MRI.getDwarfRegNum(TArch::R1, true);
+  MCCFIInstruction Inst = MCCFIInstruction::cfiDefCfa(nullptr, SP, 0);
+  MAI->addInitialFrameState(Inst);
+  return MAI;
+}
+
 // We need to define this function for linking succeed
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeTArchTargetMC() {
   TARCH_DUMP_MAGENTA
   Target &TheTArchTarget = getTheTArchTarget();
+  RegisterMCAsmInfoFn X(TheTArchTarget, createTArchMCAsmInfo);
   // Register the MC register info.
   TargetRegistry::RegisterMCRegInfo(TheTArchTarget, createTArchMCRegisterInfo);
   // Register the MC instruction info.
