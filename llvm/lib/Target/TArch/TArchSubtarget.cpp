@@ -4,7 +4,7 @@
 
 using namespace llvm;
 
-#define DEBUG_TYPE "sim-subtarget"
+#define DEBUG_TYPE "tarch-subtarget"
 
 #define GET_SUBTARGETINFO_TARGET_DESC
 #define GET_SUBTARGETINFO_CTOR

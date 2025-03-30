@@ -8,6 +8,7 @@ tablegen(LLVM TArchGenSubtargetInfo.inc -gen-subtarget)
 tablegen(LLVM TArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM TArchGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM TArchGenCallingConv.inc -gen-callingconv)
+tablegen(LLVM TArchGenAsmWriter.inc -gen-asm-writer)
 
 add_public_tablegen_target(TArchCommonTableGen)
 
