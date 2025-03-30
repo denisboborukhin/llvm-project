@@ -1,6 +1,7 @@
 #ifndef LLVM_LIB_TARGET_TARCH_MCTARGETDESC_TARCHMCTARGETDESC_H
 #define LLVM_LIB_TARGET_TARCH_MCTARGETDESC_TARCHMCTARGETDESC_H
 
+#include <memory>
 namespace llvm {
 class MCCodeEmitter;
 class MCContext;
@@ -16,6 +17,8 @@ MCCodeEmitter *createTArchMCCodeEmitter(const MCInstrInfo &MCII, MCContext &Ctx)
 MCAsmBackend *createTArchAsmBackend(const Target &T, const MCSubtargetInfo &STI,
                                   const MCRegisterInfo &MRI,
                                   const MCTargetOptions &Options);
+std::unique_ptr<MCObjectTargetWriter> createTArchELFObjectWriter(bool Is64Bit,
+                                                               uint8_t OSABI);
 } // namespace llvm
 
 // Defines symbolic names for TArch registers.  This defines a mapping from

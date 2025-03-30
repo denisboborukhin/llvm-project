@@ -4,6 +4,7 @@ add_llvm_component_library(LLVMTArchDesc
   TArchInstPrinter.cpp
   TArchMCCodeEmitter.cpp
   TArchAsmBackend.cpp
+  TArchELFObjectWriter.cpp
 
   LINK_COMPONENTS
   MC
