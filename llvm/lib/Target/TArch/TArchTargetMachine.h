@@ -8,14 +8,10 @@
 namespace llvm {
 extern Target TheTArchTarget;
 
-<<<<<<< HEAD:llvm/lib/Target/TArch/TArchTargetMachine.h
-class TArchTargetMachine : public CodeGenTargetMachineImpl {
-=======
 class TArchTargetMachine : public CodeGenTargetMachineImpl {
   std::unique_ptr<TargetLoweringObjectFile> TLOF;
   TArchSubtarget Subtarget;
 
->>>>>>> d811cf7c74de ([TArch] 10. Add TArchTargetMachine::getObjFileLowering):llvm/lib/Target/TArch/TArchTargetMachine.h
 public:
   TArchTargetMachine(const Target &T, const Triple &TT, StringRef CPU,
                    StringRef FS, const TargetOptions &Options,

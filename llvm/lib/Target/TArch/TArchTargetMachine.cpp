@@ -23,14 +23,9 @@ TArchTargetMachine::TArchTargetMachine(const Target &T, const Triple &TT,
     : CodeGenTargetMachineImpl(T, "e-m:e-p:32:32-i8:8:32-i16:16:32-i64:64-n32",
                                TT, CPU, FS, Options, Reloc::Static,
                                getEffectiveCodeModel(CM, CodeModel::Small), OL),
-<<<<<<< HEAD:llvm/lib/Target/TArch/TArchTargetMachine.cpp
-      TLOF(std::make_unique<TargetLoweringObjectFileELF>()) {
-  TARCH_DUMP_CYAN
-=======
       TLOF(std::make_unique<TargetLoweringObjectFileELF>()),
       Subtarget(TT, std::string(CPU), std::string(FS), *this) {
   TARCH_DUMP_CYAN
->>>>>>> 612d7ca39c29 ([TArch] 11. Update Subtarget and add TArchTargetLowering):llvm/lib/Target/TArch/TArchTargetMachine.cpp
   initAsmInfo();
 }
 

@@ -12,6 +12,7 @@ using namespace llvm;
 
 TArchSubtarget::TArchSubtarget(const Triple &TT, const std::string &CPU,
                            const std::string &FS, const TargetMachine &TM)
-    : TArchGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS), TLInfo(TM, *this) {
+    : TArchGenSubtargetInfo(TT, CPU, /*TuneCPU=*/CPU, FS), TLInfo(TM, *this),
+      FrameLowering(*this) {
   TARCH_DUMP_CYAN
 }
