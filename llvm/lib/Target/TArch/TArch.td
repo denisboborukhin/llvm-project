@@ -1,6 +1,7 @@
 include "llvm/Target/Target.td"
 include "TArchRegisterInfo.td"
 include "TArchInstrInfo.td"
+include "TArchCallingConv.td"
 
 class Proc<string Name, list<SubtargetFeature> Features>
  : Processor<Name, NoItineraries, Features>;
