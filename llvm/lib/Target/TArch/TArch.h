@@ -3,6 +3,7 @@
 
 #include "MCTargetDesc/TArchMCTargetDesc.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Target/TargetMachine.h"
 
 #define TARCH_DUMP(Color)                                                        \
   {                                                                            \
@@ -18,5 +19,12 @@
 #define TARCH_DUMP_CYAN TARCH_DUMP(llvm::raw_ostream::CYAN)
 #define TARCH_DUMP_MAGENTA TARCH_DUMP(llvm::raw_ostream::MAGENTA)
 #define TARCH_DUMP_WHITE TARCH_DUMP(llvm::raw_ostream::WHITE)
+namespace llvm {
+class TArchTargetMachine;
+class FunctionPass;
+
+FunctionPass *createTArchISelDag(TArchTargetMachine &TM, CodeGenOptLevel OptLevel);
+
+} // namespace llvm
 
 #endif // LLVM_LIB_TARGET_TArch_TArch_H

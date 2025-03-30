@@ -32,8 +32,17 @@ public:
   TArchPassConfig(TArchTargetMachine &TM, PassManagerBase &PM)
       : TargetPassConfig(TM, PM) {}
 
+  TArchTargetMachine &getTArchTargetMachine() const {
+    return getTM<TArchTargetMachine>();
+  }
+
   bool addInstSelector() override {
+<<<<<<< HEAD:llvm/lib/Target/TArch/TArchTargetMachine.cpp
     TARCH_DUMP_CYAN
+=======
+    TARCH_DUMP_CYAN
+    addPass(createTArchISelDag(getTArchTargetMachine(), getOptLevel()));
+>>>>>>> 50d57cc3105f ([TArch] 9. Add createTArchISelDag):llvm/lib/Target/TArch/TArchTargetMachine.cpp
     return false;
   }
 };
