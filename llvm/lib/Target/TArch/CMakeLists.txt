@@ -4,6 +4,8 @@ set(LLVM_TARGET_DEFINITIONS TArch.td)
 
 tablegen(LLVM TArchGenRegisterInfo.inc -gen-register-info)
 tablegen(LLVM TArchGenInstrInfo.inc -gen-instr-info)
+tablegen(LLVM TArchGenSubtargetInfo.inc -gen-subtarget)
+tablegen(LLVM TArchGenMCPseudoLowering.inc -gen-pseudo-lowering)
 
 add_public_tablegen_target(TArchCommonTableGen)
 
@@ -11,6 +13,8 @@ add_llvm_target(TArchCodeGen
   TArchTargetMachine.cpp
   TArchRegisterInfo.cpp
   TArchInstrInfo.cpp
+  TArchSubtarget.cpp
+  TArchAsmPrinter.cpp
 
   LINK_COMPONENTS
   CodeGen
@@ -18,6 +22,7 @@ add_llvm_target(TArchCodeGen
   Support
   Target
   TArchInfo
+  AsmPrinter
 
   ADD_TO_COMPONENT
   TArch

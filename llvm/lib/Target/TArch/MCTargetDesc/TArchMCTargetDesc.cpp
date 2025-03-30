@@ -1,5 +1,6 @@
 #include "MCTargetDesc/TArchInfo.h"
 #include "TArch.h"
+#include "TArchInstPrinter.h"
 #include "TArchMCAsmInfo.h"
 #include "TargetInfo/TArchTargetInfo.h"
 #include "llvm/MC/MCDwarf.h"
@@ -51,6 +52,15 @@ static MCAsmInfo *createTArchMCAsmInfo(const MCRegisterInfo &MRI,
   return MAI;
 }
 
+static MCInstPrinter *createTArchMCInstPrinter(const Triple &T,
+                                             unsigned SyntaxVariant,
+                                             const MCAsmInfo &MAI,
+                                             const MCInstrInfo &MII,
+                                             const MCRegisterInfo &MRI) {
+  TARCH_DUMP_MAGENTA
+  return new TArchInstPrinter(MAI, MII, MRI);
+}
+
 // We need to define this function for linking succeed
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeTArchTargetMC() {
   TARCH_DUMP_MAGENTA
@@ -63,4 +73,7 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeTArchTargetMC() {
   // Register the MC subtarget info.
   TargetRegistry::RegisterMCSubtargetInfo(TheTArchTarget,
                                           createTArchMCSubtargetInfo);
+
+  // Register the MCInstPrinter
+  TargetRegistry::RegisterMCInstPrinter(TheTArchTarget, createTArchMCInstPrinter);
 }
