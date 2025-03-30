@@ -22,7 +22,19 @@
 namespace llvm {
 class TArchTargetMachine;
 class FunctionPass;
+class TArchSubtarget;
+class AsmPrinter;
+class InstructionSelector;
+class MCInst;
+class MCOperand;
+class MachineInstr;
+class MachineOperand;
+class PassRegistry;
 
+bool lowerTArchMachineInstrToMCInst(const MachineInstr *MI, MCInst &OutMI,
+                                  AsmPrinter &AP);
+bool LowerTArchMachineOperandToMCOperand(const MachineOperand &MO,
+                                       MCOperand &MCOp, const AsmPrinter &AP);
 FunctionPass *createTArchISelDag(TArchTargetMachine &TM, CodeGenOptLevel OptLevel);
 
 } // namespace llvm

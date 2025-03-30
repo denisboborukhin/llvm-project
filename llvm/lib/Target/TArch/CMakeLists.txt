@@ -20,6 +20,7 @@ add_llvm_target(TArchCodeGen
   TArchAsmPrinter.cpp
   TArchISelDagToDag.cpp
   TArchISelLowering.cpp
+  TArchMCInstLower.cpp
 
   LINK_COMPONENTS
   CodeGen
