@@ -1,5 +1,7 @@
+#include "MCTargetDesc/TArchInfo.h"
 #include "TArch.h"
 #include "TargetInfo/TArchTargetInfo.h"
+#include "llvm/MC/MCInstrInfo.h"
 #include "llvm/MC/MCRegisterInfo.h"
 #include "llvm/MC/TargetRegistry.h"
 
@@ -8,10 +10,20 @@ using namespace llvm;
 #define GET_REGINFO_MC_DESC
 #include "TArchGenRegisterInfo.inc"
 
+#define GET_INSTRINFO_MC_DESC
+#include "TArchGenInstrInfo.inc"
+
 static MCRegisterInfo *createTArchMCRegisterInfo(const Triple &TT) {
   TARCH_DUMP_MAGENTA
   MCRegisterInfo *X = new MCRegisterInfo();
   InitTArchMCRegisterInfo(X, TArch::R0);
+  return X;
+}
+
+static MCInstrInfo *createTArchMCInstrInfo() {
+  TARCH_DUMP_MAGENTA
+  MCInstrInfo *X = new MCInstrInfo();
+  InitTArchMCInstrInfo(X);
   return X;
 }
 
@@ -21,4 +33,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeTArchTargetMC() {
   Target &TheTArchTarget = getTheTArchTarget();
   // Register the MC register info.
   TargetRegistry::RegisterMCRegInfo(TheTArchTarget, createTArchMCRegisterInfo);
+  // Register the MC instruction info.
+  TargetRegistry::RegisterMCInstrInfo(TheTArchTarget, createTArchMCInstrInfo);
 }
