@@ -4,6 +4,7 @@
 #include "TArch.h"
 #include "TArchFrameLowering.h"
 #include "TArchISelLowering.h"
+#include "TArchRegisterInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
 #define GET_SUBTARGETINFO_HEADER
@@ -14,6 +15,7 @@ namespace llvm {
 class TArchSubtarget : public TArchGenSubtargetInfo {
   TArchTargetLowering TLInfo;
   TArchFrameLowering FrameLowering;
+  TArchRegisterInfo RegInfo;
 
 public:
   TArchSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -30,6 +32,10 @@ public:
   const TArchFrameLowering *getFrameLowering() const override {
     TARCH_DUMP_CYAN
     return &FrameLowering;
+  }
+  const TArchRegisterInfo *getRegisterInfo() const override {
+    TARCH_DUMP_CYAN
+    return &RegInfo;
   }
 };
 
