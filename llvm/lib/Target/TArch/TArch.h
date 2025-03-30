@@ -1,6 +1,7 @@
-#ifndef LLVM_LIB_TARGET_TARCH_TARCH_H
-#define LLVM_LIB_TARGET_TARCH_TARCH_H
+#ifndef LLVM_LIB_TARGET_TArch_TArch_H
+#define LLVM_LIB_TARGET_TArch_TArch_H
 
+#include "MCTargetDesc/TArchMCTargetDesc.h"
 #include "llvm/Support/raw_ostream.h"
 
 #define TARCH_DUMP(Color)                                                        \
@@ -16,5 +17,6 @@
 #define TARCH_DUMP_YELLOW TARCH_DUMP(llvm::raw_ostream::YELLOW)
 #define TARCH_DUMP_CYAN TARCH_DUMP(llvm::raw_ostream::CYAN)
 #define TARCH_DUMP_MAGENTA TARCH_DUMP(llvm::raw_ostream::MAGENTA)
+#define TARCH_DUMP_WHITE TARCH_DUMP(llvm::raw_ostream::WHITE)
 
-#endif // LLVM_LIB_TARGET_TARCH_TARCH_H
+#endif // LLVM_LIB_TARGET_TArch_TArch_H
