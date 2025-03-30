@@ -76,4 +76,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeTArchTargetMC() {
 
   // Register the MCInstPrinter
   TargetRegistry::RegisterMCInstPrinter(TheTArchTarget, createTArchMCInstPrinter);
+  // Register the MC Code Emitter.
+  TargetRegistry::RegisterMCCodeEmitter(TheTArchTarget, createTArchMCCodeEmitter);
 }
