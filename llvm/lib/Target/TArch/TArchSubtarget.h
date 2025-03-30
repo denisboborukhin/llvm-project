@@ -4,7 +4,9 @@
 #include "TArch.h"
 #include "TArchFrameLowering.h"
 #include "TArchISelLowering.h"
+#include "TArchInstrInfo.h"
 #include "TArchRegisterInfo.h"
+#include "llvm/CodeGen/SelectionDAGTargetInfo.h"
 #include "llvm/CodeGen/TargetSubtargetInfo.h"
 
 #define GET_SUBTARGETINFO_HEADER
@@ -16,6 +18,8 @@ class TArchSubtarget : public TArchGenSubtargetInfo {
   TArchTargetLowering TLInfo;
   TArchFrameLowering FrameLowering;
   TArchRegisterInfo RegInfo;
+  TArchInstrInfo InstrInfo;
+  SelectionDAGTargetInfo TSInfo;
 
 public:
   TArchSubtarget(const Triple &TT, const std::string &CPU, const std::string &FS,
@@ -36,6 +40,11 @@ public:
   const TArchRegisterInfo *getRegisterInfo() const override {
     TARCH_DUMP_CYAN
     return &RegInfo;
+  }
+  const TArchInstrInfo *getInstrInfo() const override { return &InstrInfo; }
+  const SelectionDAGTargetInfo *getSelectionDAGInfo() const override {
+    TARCH_DUMP_CYAN
+    return &TSInfo;
   }
 };
 
